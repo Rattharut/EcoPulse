@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>EcoPulse-Quiz</title>
+    <link rel="stylesheet" href="Reset.css">
+    <link rel="stylesheet" href="main-2.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400..700&family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body class="smooch-text">
+
+    <section class="animate__animated animate__fadeIn">
+    <main class="wrap">
+        <section class="card" aria-label="EcoPulse quiz">
+            
+            <div class="header">
+                <div class="brand">
+                    <div class="brand-text logo-H caveat-text" style="margin-left:-4px;">
+                        <span>EcoPulse<i class="fa-solid fa-heart-pulse icon-Logo"></i></span>
+                    </div>
+                </div>
+                <span class="top-count" id="topCount">01 / 10</span>
+            </div>
+
+            <span class="q-label">Choose the answer that best matches what you'd actually do</span>
+            <span class="q-label" style="margin-left:-1px;"><i class="fa-solid fa-seedling"></i></span>
+            <h1 class="q-text">Leftover soda in a plastic bottle. What do you do?</h1>
+
+            <div class="options" id="options">
+                <button class="option" data-letter="A">
+                    <span class="option-letter">A</span>
+                    <span class="option-text">Pour it down the sink and toss the bottle in the trash.</span>
+                </button>
+                <button class="option" data-letter="B">
+                    <span class="option-letter">B</span>
+                    <span class="option-text">Empty the liquid, rinse the bottle, then place it in recycling.</span>
+                </button>
+                <button class="option" data-letter="C">
+                    <span class="option-letter">C</span>
+                    <span class="option-text">Throw the whole bottle — soda and all — into the recycling bin.</span>
+                </button>
+            </div>
+
+            <div class="progress">
+                <div class="progress-meta">
+                    <span class="left">Question <span class="qn">1</span> of 10</span>
+                    <span class="right"><span id="pct">10</span>% Complete</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progFill" style="width:10%"></div>
+                </div>
+            </div>
+
+            <div class="nav">
+                <button class="btn btn-outline" id="prevBtn" disabled>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    Previous
+                </button>
+                <button class="btn btn-primary" id="nextBtn">
+                    Next
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+            </div>
+        </section>
+    </main>
+    </section>
+    
+    <script>
+    const QUESTIONS = [
+        {
+            question: "Leftover soda in a plastic bottle. What do you do?",
+            options: [
+                { text: "Empty the liquid, rinse the bottle, then place it in recycling.", score: 2 },
+                { text: "Pour it down the sink and toss the bottle in the trash.", score: 1 },
+                { text: "Throw the whole bottle — soda and all — into the recycling bin.", score: 0 }
+            ]
+        },
+        {
+            question: "Your old smartphone completely died. How do you get rid of it?",
+            options: [
+                { text: "Drop it off at an official E-waste collection point.", score: 2 },
+                { text: "Toss it straight into the general trash bin.", score: 0 },
+                { text: "Keep it locked in your drawer forever to avoid the hassle.", score: 1 }
+            ]
+        },
+        {
+            question: "Unfinished food on your plate. Next step?",
+            options: [
+                { text: "Store it in the fridge and forget it.", score: 1 },
+                { text: "Save it for later or put in food waste.", score: 2 },
+                { text: "Scrape it into the general trash bin.", score: 0 }
+            ]
+        },
+        {
+            question: "Old notebooks and cardboard boxes at home?",
+            options: [
+                { text: "Toss them out with daily garbage.", score: 0 },
+                { text: "Clean, bundle, and sell for recycling.", score: 2 },
+                { text: "Pile them up in the corner of my room.", score: 1 }
+            ]
+        },
+        {
+            question: "Buying a new shirt. The old clothing?",
+            options: [
+                { text: "Keep it deep inside the closet.", score: 1 },
+                { text: "Throw it into the trash bin.", score: 0 },
+                { text: "Donate, sell, or reuse as rags.", score: 2 }
+            ]
+        },
+        {
+            question: "Delivery food plastic containers. What do you do?",
+            options: [
+                { text: "Wash with soap and reuse at home.", score: 2 },
+                { text: "Throw away with oil stains inside.", score: 0 },
+                { text: "Quick water rinse, then toss it.", score: 1 }
+            ]
+        },
+        {
+            question: "Dead batteries or broken electronics?",
+            options: [
+                { text: "Leave them inside my drawer forever.", score: 1 },
+                { text: "Drop them at an E-Waste collection point.", score: 2 },
+                { text: "Mix them with regular wet waste.", score: 0 }
+            ]
+        },
+        {
+            question: "Buying drinks at a local cafe. Your style?",
+            options: [
+                { text: "Get a plastic cup, straw, and bag.", score: 0 },
+                { text: "Bring my own reusable tumbler.", score: 2 },
+                { text: "Use the plastic cup but skip the straw.", score: 1 }
+            ]
+        },
+        {
+            question: "Choosing items at the store. Packaging focus?",
+            options: [
+                { text: "Only care about price and quality.", score: 1 },
+                { text: "Choose minimal or eco-friendly wraps.", score: 2 },
+                { text: "Premium items with fancy layers.", score: 0 }
+            ]
+        },
+        {
+            question: "Talking about environmental issues with friends?",
+            options: [
+                { text: "Often, sharing eco-tips and ideas.", score: 2 },
+                { text: "Never, it does not matter to me.", score: 0 },
+                { text: "Rarely, only when it is a big trend.", score: 1 }
+            ]
+        }
+    ];
+
+    const TOTAL = QUESTIONS.length; 
+    let current = 1;                
+    let answers = {};               // เก็บตัวเลือกว่าตอบข้อไหนไว้บ้าง เช่น {1: "B", 2: "C"}
+
+    const qText = document.querySelector('.q-text');
+    const optionElements = document.querySelectorAll('.option');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progFill = document.getElementById('progFill');
+    const pct = document.getElementById('pct');
+    const topCount = document.getElementById('topCount');
+    const qnSpans = document.querySelectorAll('.qn');
+
+    optionElements.forEach(opt => {
+        opt.addEventListener('click', () => {
+            optionElements.forEach(o => o.classList.remove('active'));
+            opt.classList.add('active');
+            answers[current] = opt.dataset.letter; 
+        });
+    });
+
+    function update(){
+        const currentData = QUESTIONS[current - 1];
+        qText.innerHTML = currentData.question;
+        
+        optionElements.forEach((opt, index) => {
+            opt.classList.remove('active');
+            const textSpan = opt.querySelector('.option-text');
+            if (textSpan) {
+                textSpan.textContent = currentData.options[index].text;
+            }
+            if (answers[current] === opt.dataset.letter) {
+                opt.classList.add('active');
+            }
+        });
+
+        const p = Math.round((current / TOTAL) * 100); 
+        progFill.style.width = p + '%';              
+        pct.textContent = p;                         
+        topCount.textContent = String(current).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0'); 
+        qnSpans.forEach(s => s.textContent = current);
+        
+        prevBtn.disabled = current === 1;
+
+        if (current === TOTAL) {
+            nextBtn.innerHTML = 'Submit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+        } else {
+            nextBtn.innerHTML = 'Next <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+        }
+    }
+
+    nextBtn.addEventListener('click', () => { 
+        if (!answers[current]) {
+            alert("Please select an answer before moving forward.");
+            return;
+        }
+
+        if (current < TOTAL) { 
+            current++; 
+            update(); 
+        } else {
+            // คำนวณคะแนนรวมตามค่า score จริงของข้อความที่เลือก
+            let totalScore = 0;
+            for (let i = 1; i <= TOTAL; i++) {
+                const letterSelected = answers[i]; 
+                const questionData = QUESTIONS[i - 1];
+                
+                const indexMap = { 'A': 0, 'B': 1, 'C': 2 };
+                const selectedIndex = indexMap[letterSelected];
+                
+                totalScore += questionData.options[selectedIndex].score;
+            }
+            
+            localStorage.setItem('ecoPulseScore', totalScore);
+            window.location.href = "result.html";
+        }
+    });
+
+    prevBtn.addEventListener('click', () => { 
+        if (current > 1) { 
+            current--; 
+            update(); 
+        }
+    });
+
+    update();
+</script>
+</body>
+</html>

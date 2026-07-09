@@ -70,6 +70,12 @@
     </section>
     
     <script>
+
+    window.addEventListener('DOMContentLoaded', () => {
+    const middleY = document.body.scrollHeight / 2 - window.innerHeight / 2;
+    window.scrollTo({top: middleY,behavior: 'auto'})
+    ;});
+        
     const QUESTIONS = [
         {
             question: "Leftover soda in a plastic bottle. What do you do?",

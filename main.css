@@ -1,0 +1,2847 @@
+.Avata-space-title{flex: 1;}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100% !important;
+  height: 100%;
+  position: relative;
+  overflow-x: hidden !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100vh;
+  position: relative;
+  font-family: monospace;        
+}
+
+p {
+  font-size: 32px;
+}
+
+/* ========================================================
+   2. FONT STYLES (ระบบฟอนต์)
+   ======================================================== */
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500; /* แก้ไขจาก weight เป็นตัวเลขมาตรฐาน */
+  font-style: normal;
+}
+
+.caveat-text {
+  font-family: "Caveat", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.smooch-text {
+  font-family: "Smooch Sans", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400; 
+  font-style: normal;
+}
+
+.archivo-black-regular {
+  font-family: "Archivo Black", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ========================================================
+   3. HELPERS & UTILITIES (คลาสอำนวยความสะดวก)
+   ======================================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.B-spact {
+  margin-top: 36px;  
+}
+
+.hover-elevate {
+  transition: box-shadow 0.1s ease-out 0s, transform 0.1s ease-out 0s;
+  cursor: pointer;
+}
+
+.hover-elevate:hover {
+  transform: translateY(-5px);
+}
+
+.hover-elevate:active {
+  box-shadow: none;
+}
+
+/* ========================================================
+   4. KEYFRAMES & ANIMATION SYSTEM
+   ======================================================== */
+@keyframes menuEntrance {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -50px, 0); /* 3D สำหรับแก้บั๊กเรนเดอร์บาร์แหว่ง */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomAndFade {
+  from {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate__animated {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ========================================================
+   5. MENU BAR (แถบเมนูด้านบนสุด)
+   ======================================================== */
+.menu-bar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  z-index: 9999; 
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(232, 232, 232, 0.5);
+  animation: menuEntrance 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  opacity: 0;
+
+  /* ป้องกันบาร์กระตุก/แหว่ง ขณะสกรอลจอ */
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.menu-bar {
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-max {
+  max-width: 98%;  
+}
+
+.logo-H {
+  font-size: 51px;
+  color: #40e384; 
+  margin-left: 45px; 
+}
+
+.icon-Logo {
+  margin-left: -6px;  
+}
+
+.nav-list {
+  display: flex;
+}
+
+.nav-item {
+  font-size: 18px;    
+}
+
+.nav-item:not(:first-child) {
+  margin-left: 16px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #0A210F;
+}
+
+.nav-link:hover {
+  color: #14591D;
+}
+
+.nav-link:active {
+  opacity: 0.5;
+}
+
+.nav-link.active {
+  background-color: #d6e1d5;
+  color: #3f8a4a;
+  padding: 10px 15px;  
+  border-radius: 24px;
+}
+
+.nav-link-Q {
+  background-image: linear-gradient(135deg, #3f8a4a 0%, #7dd47e 100%);
+  color: white;
+  padding: 10px 15px;  
+  border-radius: 24px; 
+  text-decoration: none; 
+}
+
+.menu-V {
+  font-size: 36px;
+  color: #14591D;  
+}
+
+/* ========================================================
+   6. HERO SECTION & BACKGROUNDS
+   ======================================================== */
+/* ยุบรวมสไตล์ของ start-img และ start-img-about ที่เหมือนกันเข้าด้วยกัน */
+.start-img,
+.start-img-about {
+  background-image: url('./image/PC\ Main.png');
+  position: relative;       
+  overflow: hidden;      
+  top: 0;            
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+  animation: zoomAndFade 0.7s ease-out forwards;
+  z-index: 1;
+}
+
+/* ดึงคุณสมบัติร่วมของภาพพื้นหลังเลเยอร์ซ้อน (Overlay) */
+.start-img::before,
+.start-img-about::before {
+  content: "";       
+  position: absolute;
+  top: 0;            
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.start-img::before {
+  background-image: linear-gradient(to right, 
+    rgba(0, 0, 0, 0.5) 0%,       
+    rgba(255, 255, 255, 0.035) 50%,
+    rgba(255, 255, 255, 0.35) 100% 
+  ), url('./image/PC\ Main.png');
+  animation: overlayFadeIn 1.2s ease-in-out forwards;
+}
+
+.start-img-about::before {
+  background-image: linear-gradient(to right, 
+    rgba(0, 0, 0, 0.7) 0%,       
+    rgba(255, 255, 255, 0.35) 100% 
+  ), url('./image/PC\ Main.png');
+  animation: overlayFadeIn 0.9s ease-in-out forwards;
+}
+
+.hero-section {
+  max-width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "first second "
+    "third fourth ";
+  row-gap: 16px;
+  column-gap: 16px;
+}
+
+.area-first  { grid-area: first; }
+.area-second { grid-area: second; }
+.area-third  { grid-area: third; }
+.area-fourth { grid-area: fourth; }
+
+.T {
+  display: flex;
+  justify-content: center;
+}
+
+/* ========================================================
+   7. HERO AREAS (ข้อมูล 4 ส่วนของหน้าแรก)
+   ======================================================== */
+/* Area 1: Trash Sea */
+.Trash-sea {
+  margin-top: 108px;
+  margin-left: 128px;
+  max-width: 55%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: white;
+}
+
+.Main-PLASTIC-TIDE {
+  font-size: 48px;
+  color: white; 
+  margin-bottom: 8px;
+  margin-top: 24px;
+}
+
+.main-Trash-sea {
+  font-size: 48px;
+  margin-bottom: 8px; 
+}
+
+.Trash-sea-title {
+  background-image: linear-gradient(to bottom right, rgba(90,164,111,0.9), rgba(10,33,29, 0.1)), url('./image/Sea.jpg');
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 28px;
+  margin-bottom: 8px;
+  background-size: cover;
+  background-position: center; 
+}
+
+/* Area 2: The Big Three */
+.Big-Three {
+  margin-top: 156px;
+  margin-right: -128px;
+  max-width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  color: white;
+}
+
+.Main-Big-Three {
+  font-size: 48px;
+  text-align: center;
+  color: white;
+}
+
+.icon-S {
+  position: relative;
+  top: 13px;        
+  left: 285px;     
+  font-size: 36px;  
+  color: white;   
+  cursor: pointer;
+  margin-top: -48px;
+}
+
+.Big-Three-title-one {
+  background-image: linear-gradient(to bottom right, rgba(90,164,111,0.8), rgba(10,33,29, 0.1)), url('./image/Plastic\ Fix.png');
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 32px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-size: cover;
+  background-position: center; 
+}
+
+.Big-Three-title-two {
+  background-image: linear-gradient(to bottom right, rgba(90,164,111,0.8), rgba(10,33,29, 0.1)), url('./image/Food\ Waste\ Fix.png');
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 32px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-size: cover;
+  background-position: center; 
+}
+
+.Big-Three-title-three {
+  background-image: linear-gradient(to bottom right, rgba(90,164,111,0.8), rgba(10,33,29, 0.1)), url('./image/IT\ Fix.png');
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 32px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-size: cover;
+  background-position: center; 
+}
+
+/* Area 3: The Ripple Effect */
+.The-Ripple {
+  margin-top: -80px;
+  margin-left: 128px;
+  max-width: 65%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  color: white;
+  padding: 40px 45px;
+}
+
+.Main-The-Ripple {
+  font-size: 48px;
+  color: white;
+}
+
+.The-Ripple-title-one {
+  background-image: linear-gradient(to bottom right, rgba(90,164,111,0.7), rgba(10,33,29, 0.1)), url('./image/one-person\ Fix.png');
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-position: center;
+  background-size: cover;
+}
+
+.The-Ripple-title-two {
+  background-image: linear-gradient(to bottom right, rgba(90,164,111,0.7), rgba(10,33,29, 0.1)), url('./image/School\ Fix.png');
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Area 4: Find Your Avatar & Button */
+.Find-Your {
+  margin-top: 50px;
+  margin-left: 128px;
+  min-width: 45%;
+  max-width: 65%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: white;
+  text-align: center;
+}
+
+.main-Find-Avatar {
+  font-size: 64px;
+  margin-top: 4px;
+  margin-bottom: 24px;  
+}
+
+.Find-Your-title {
+  background-image: linear-gradient(to bottom right, rgba(90,164,111,0.7), rgba(10,33,29, 0.1)), url('');
+  border-radius: 12px;
+  padding: 15px 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.button {
+  text-align: center;
+  max-width: 40%;
+  text-decoration: none;  
+  color: white;
+  background-color: #14591D;
+  border-radius: 8px;
+  padding: 15px 20px;
+  font-size: 32px;
+  margin-top: 12px;
+}
+
+.Avatar-3 {
+  font-size: 24px;
+  margin-top: 24px;  
+}
+
+/* ========================================================
+   8. ABOUT PAGE & CHARACTER ROLES
+   ======================================================== */
+.container-About {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  min-height: 85vh;                    
+  width: 100%;
+  text-align: left;
+  margin-top: 150px;
+  position: relative;
+  z-index: 2;
+}
+
+.About-title {
+  margin-left: 200px;
+  color: white;  
+}
+
+.logo-Q {
+  font-size: 100px;
+  color: #40e384;
+  margin-top: 24px;
+  margin-bottom: 20px;  
+}
+
+.Back-Container {
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(125,212,126,.25), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(240,215,140,.25), transparent 40%);  
+}
+
+.The-Roles {
+  padding-top: 60px;  
+  padding-bottom: 150px; 
+}
+
+.Show {
+  font-size: 28px;  
+  color: #14591D;
+}
+
+.Roles-main {
+  font-size: 48px; 
+  color: #40e384;
+  margin-bottom: 32px;
+}
+
+.Avata-space {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Avata-space-title { 
+  display: flex;
+  flex-direction: column;
+  margin: 0px 25px;
+}
+
+.Photo-Avata {
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.About-Avata {
+  display: flex;
+  flex-direction: column;
+  text-align: center;  
+  max-width: 100%;
+}
+
+.Avata-H {
+  font-size: 36px;
+  color: #40e384; 
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.Avata-P {
+  font-size: 26px;
+  color: #0A210F;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* ========================================================
+   9. FOOTER (ส่วนท้ายสุดของหน้าเว็บ)
+   ======================================================== */
+.footer-container {
+  max-width: 100%;
+  background: rgba(232,241,227,.4)
+}
+
+.footer-border {
+  border-top: 1px solid rgba(232, 232, 232, 0.5)
+}
+
+.footer-section {
+  padding-top: 24px;
+  padding-bottom: 36px;
+}
+
+.footer-space {
+  display: flex;
+  justify-content: space-between;          
+  width: 100%;    
+}
+
+.footer-space-title {
+  max-width: 40%;  
+}
+
+.main-footer {
+  font-size: 36px;
+  color: #40e384;  
+}
+
+.footer-P {
+  font-size: 22px;
+  color: #717171;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN & BREAKPOINTS
+   ========================================= */
+
+/* =================💻 ฝั่งคอมพิวเตอร์ (9 ขนาด) ================= */
+
+/* 4K */
+@media (min-width: 2561px) and (max-width: 3840px) {
+  .nav-link.active {padding: 25px 30px; border-radius: 65px;}
+  .nav-link-Q {padding: 25px 30px; border-radius: 65px;}
+  .menu-V {font-size: 125px;}
+  .logo-H {font-size: 135px; margin-left: 100px;}
+  .menu-bar {height: 200px;}
+  .The-Roles {padding-top: 275px;}
+  .Roles-main {padding-bottom: 80px;}
+  .start-img {
+    background-image: url('./image/Wall\ 2560px.png');
+  }
+  
+  .start-img::before {
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 2560px.png');
+  }
+
+  .nav-item:not(:first-child) {margin-left: 65px;}
+  .nav-item {font-size: 70px;}
+  p { font-size: 80px; }
+  i { font-size: 80px; }
+  .icon-Logo { font-size: 140px !important; }
+
+  .Trash-sea {
+    margin-top: 300px;
+    margin-left: 270px;
+    max-width: 67%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 120px; }
+  .main-Trash-sea { font-size: 120px; }
+  .Trash-sea-title { font-size: 80px; border-radius: 26px; padding: 35px 40px}
+
+  .Big-Three {
+    margin-top: 350px;
+    margin-right: -80px;
+    max-width: 75%;
+  }  
+
+  .Main-Big-Three { font-size: 120px; margin-bottom: -80px;}
+
+  .icon-S {
+    top: 45px;        
+    left: 550px;     
+    font-size: 120px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 80px; border-radius: 26px; padding: 35px 40px; margin-top: 20px;
+    margin-bottom: 20px; 
+  }
+
+  .The-Ripple {
+    margin-top: -100px;
+    margin-left: 250px;
+    max-width: 80%;
+    border-radius: 26px;
+    padding: 35px 40px
+  }
+  .The-Ripple-title-one {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.The-Ripple-title-two {
+  margin-top: 20px;
+  margin-bottom: 20px;
+} 
+
+  .Main-The-Ripple {
+    position: relative;
+    font-size: 120px;
+  }
+
+  .Find-Your {
+    margin-top: 125px;
+    margin-left: 60px;
+  }
+
+  .Find-Your-title {
+  border-radius: 26px;
+  padding: 35px 40px
+ }
+
+  .main-Find-Avatar { font-size: 120px; margin-bottom: 40px; }
+
+  .button {
+  border-radius: 22px;
+  font-size: 80px;
+  padding: 30px 35px;
+  }
+
+  .Avatar-3 {
+  font-size: 65px;
+  margin-top: 50px;  
+  }
+
+  .About-title {
+    margin-top: 40px ;
+    margin-left: 500px ;
+  }
+
+  .logo-Q {
+    font-size: 100px;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    width: 100%;
+    max-width: 80%;
+    margin: auto;
+  }
+
+  .Show { font-size: 100px; }
+  .Roles-main { font-size: 120px; }
+  .Avata-H { font-size: 100px; }
+  .Avata-P { font-size: 80px; }
+  
+  .container-About {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  min-height: 85vh;                    
+  width: 100%;
+  text-align: left;
+  margin-top: 150px;
+  position: relative;
+  z-index: 2;
+}
+
+.About-title {
+  margin-top: 200px;
+  margin-left: 350px;  
+}
+
+  .start-img-about {
+    background-image: url('./image/Wall\ 2560px.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 2560px.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+
+  .footer-space-title { max-width: 35%; }
+  .main-footer {font-size: 120px; }
+  .footer-P {font-size: 60px;}
+
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+
+  .menu-V {font-size: 65px;}
+  .logo-H {font-size: 80px;}
+  .menu-bar {height: 108px;}
+  .B-spact {margin-top: 80px;}
+  .start-img {
+    background-image: url('./image/Wall\ 2560px.png');
+  }
+  
+  .start-img::before {
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 2560px.png');
+  }
+
+  .nav-item:not(:first-child) {margin-left: 20px;}
+  .nav-item {font-size: 36px;}
+  p { font-size: 56px; }
+  i { font-size: 56px; }
+  .icon-Logo { font-size: 56px !important; }
+
+  .Trash-sea {
+    margin-top: 200px;
+    margin-left: 140px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 65px; }
+  .main-Trash-sea { font-size: 65px; }
+  .Trash-sea-title { font-size: 56px; border-radius: 26px;}
+
+  .Big-Three {
+    margin-top: 240px;
+    margin-right: -80px;
+    max-width: 75%;
+  }  
+
+  .Main-Big-Three { font-size: 65px; }
+
+  .icon-S {
+    top: 7px;        
+    left: 300px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 56px; border-radius: 26px; 
+  }
+
+  .The-Ripple {
+    margin-top: -50px;
+    margin-left: 140px;
+    max-width: 80%;
+    border-radius: 26px;
+  }
+
+  .Main-The-Ripple {
+    position: relative;
+    font-size: 65px;
+  }
+
+  .Find-Your {
+    margin-top: 105px;
+    margin-left: 60px;
+    border-radius: 26px;
+  }
+
+  .main-Find-Avatar { font-size: 75px; }
+  .button { font-size: 56px; }
+  .Avatar-3 { font-size: 46px; }
+
+  .About-title {
+    margin-top: 40px ;
+    margin-left: 500px ;
+  }
+
+  .logo-Q {
+    font-size: 100px;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    width: 100%;
+    max-width: 80%;
+    margin: auto;
+  }
+
+  .Show { font-size: 56px;}
+  .Roles-main { font-size: 65px; }
+  .Avata-H { font-size: 56px; }
+  .Avata-P { font-size: 36px; }
+ 
+  .container-About {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  min-height: 85vh;                    
+  width: 100%;
+  text-align: left;
+  margin-top: 150px;
+  position: relative;
+  z-index: 2;
+}
+
+.About-title {
+  margin-left: 200px;
+  color: white;  
+}
+  .start-img-about {
+    background-image: url('./image/Wall\ 2560px.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 2560px.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+  .footer-space-title { max-width: 35%; }
+  .main-footer {font-size: 46px; }
+  .footer-P {font-size: 36px;}
+
+}
+
+@media (max-width: 1600px){
+  .menu-bar {
+  height: 72px;
+  }
+
+.start-img {
+    background-image: url('./image/PC\ Main.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .start-img::before {
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;   
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/PC\ Main.png');
+  }
+
+  p { font-size: 32px; }
+  i { font-size: 36px; }
+  .icon-Logo { font-size: 51px !important; }
+
+  .Trash-sea {
+    margin-top: 98px;
+    margin-left: 80px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 46px; }
+  .main-Trash-sea { font-size: 50px; }
+  .Trash-sea-title { font-size: 36px; }
+
+  .Big-Three {
+    margin-top: 125px;
+    margin-right: -36px;
+    max-width: 75%;
+  }  
+
+  .Main-Big-Three { font-size: 46px; }
+  .icon-S {
+    top: 11px;        
+    left: 192px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 32px; 
+  }
+
+  .The-Ripple {
+    margin-top: -85px;
+    margin-left: 60px;
+    max-width: 80%;
+  }
+
+  .Main-The-Ripple {
+    position: relative;
+    font-size: 46px;
+  }
+
+  .Find-Your {
+    margin-top: 50px;
+    margin-left: 40px;
+  }
+
+  .main-Find-Avatar { font-size: 46px; }
+  .button { font-size: 32px; }
+  .Avatar-3 { font-size: 26px; }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 85vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+  }
+
+  .logo-Q {
+    font-size: 100px;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    width: 100%;
+    max-width: 80%;
+    margin: auto;
+  }
+
+  .Show { font-size: 36px; }
+  .Roles-main { font-size: 46px; }
+  .Avata-H { font-size: 36px; }
+  .Avata-P { font-size: 26px; }
+
+  .start-img-about {
+    background-image: url('./image/PC\ Main.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('../image/PC\ Main.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+  .footer-space-title { max-width: 35%; }
+
+}
+
+@media (max-width: 1536px){ 
+
+.start-img {
+    background-image: url('./image/PC\ Main.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .start-img::before {
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;   
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/PC\ Main.png');
+  }
+
+  p { font-size: 32px; }
+  i { font-size: 36px; }
+  .icon-Logo { font-size: 51px !important; }
+
+  .Trash-sea {
+    margin-top: 98px;
+    margin-left: 80px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 46px; }
+  .main-Trash-sea { font-size: 50px; }
+  .Trash-sea-title { font-size: 36px; }
+
+  .Big-Three {
+    margin-top: 125px;
+    margin-right: -36px;
+    max-width: 75%;
+  }  
+
+  .Main-Big-Three { font-size: 46px; }
+  .icon-S {
+    top: 11px;        
+    left: 192px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 32px; 
+  }
+
+  .The-Ripple {
+    margin-top: -85px;
+    margin-left: 60px;
+    max-width: 80%;
+  }
+
+  .Main-The-Ripple {
+    position: relative;
+    font-size: 46px;
+  }
+
+  .Find-Your {
+    margin-top: 50px;
+    margin-left: 40px;
+  }
+
+  .main-Find-Avatar { font-size: 46px; }
+  .button { font-size: 32px; }
+  .Avatar-3 { font-size: 26px; }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 85vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+  }
+
+  .logo-Q {
+    font-size: 100px;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    width: 100%;
+    max-width: 80%;
+    margin: auto;
+  }
+
+  .Show { font-size: 36px; }
+  .Roles-main { font-size: 46px; }
+  .Avata-H { font-size: 36px; }
+  .Avata-P { font-size: 26px; }
+
+  .start-img-about {
+    background-image: url('./image/PC\ Main.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('../image/PC\ Main.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+  .footer-space-title { max-width: 35%; }
+
+}
+
+@media (max-width: 1440px) {
+
+.start-img {
+    background-image: url('./image/Wall\ 1440px.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .start-img::before {
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;   
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 1440px.png');
+  }
+
+  p { font-size: 32px; }
+  i { font-size: 36px; }
+  .icon-Logo { font-size: 51px !important; }
+
+  .Trash-sea {
+    margin-top: 98px;
+    margin-left: 80px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 46px; }
+  .main-Trash-sea { font-size: 50px; }
+  .Trash-sea-title { font-size: 36px; }
+
+  .Big-Three {
+    margin-top: 125px;
+    margin-right: -36px;
+    max-width: 75%;
+  }  
+
+  .Main-Big-Three { font-size: 46px; }
+  .icon-S {
+    top: 11px;        
+    left: 192px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 32px; 
+  }
+
+  .The-Ripple {
+    margin-top: -85px;
+    margin-left: 60px;
+    max-width: 80%;
+  }
+
+  .Main-The-Ripple {
+    position: relative;
+    font-size: 46px;
+  }
+
+  .Find-Your {
+    margin-top: 50px;
+    margin-left: 40px;
+  }
+
+  .main-Find-Avatar { font-size: 46px; }
+  .button { font-size: 32px; }
+  .Avatar-3 { font-size: 26px; }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 85vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+  }
+
+  .logo-Q {
+    font-size: 100px;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    width: 100%;
+    max-width: 80%;
+    margin: auto;
+  }
+
+  .Show { font-size: 36px; }
+  .Roles-main { font-size: 46px; }
+  .Avata-H { font-size: 36px; }
+  .Avata-P { font-size: 26px; }
+
+  .start-img-about {
+    background-image: url('./image/Wall\ 1440px.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 1440px.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+  .footer-space-title { max-width: 35%; }
+
+}
+
+@media (max-width: 1366px){
+  
+  .start-img {
+    background-image: url('./image/Wall\ 1440px.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .start-img::before {
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;   
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 1440px.png');
+  }
+
+  p { font-size: 26px; }
+  i { font-size: 30px; }
+  .icon-Logo { font-size: 51px !important; }
+
+  .Trash-sea {
+    margin-top: 98px;
+    margin-left: 80px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 36px; }
+  .main-Trash-sea { font-size: 42px; }
+  .Trash-sea-title { font-size: 26px; }
+
+  .Big-Three {
+    margin-top: 125px;
+    margin-right: -36px;
+    max-width: 75%;
+  }  
+
+  .Main-Big-Three { font-size: 36px; }
+  .icon-S {
+    top: 11px;        
+    left: 192px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 26px; 
+  }
+
+  .The-Ripple {
+    margin-top: -85px;
+    margin-left: 60px;
+    max-width: 80%;
+  }
+
+  .Main-The-Ripple {
+    position: relative;
+    font-size: 36px;
+  }
+
+  .Find-Your {
+    margin-top: 20px;
+    margin-left: 40px;
+  }
+
+  .main-Find-Avatar { font-size: 42px; }
+  .button { font-size: 28px; }
+  .Avatar-3 { font-size: 24px; }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 85vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+  }
+
+  .logo-Q {
+    font-size: 100px;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .Show { font-size: 26px; }
+  .Roles-main { font-size: 36px; }
+  .Avata-H { font-size: 30px; }
+  .Avata-P { font-size: 24px; }
+
+  .start-img-about {
+    background-image: url('./image/Wall\ 1440px.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 1440px.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+  .footer-space-title { max-width: 35%; }
+
+}
+
+@media (max-width: 1280px) {
+
+  .start-img {
+    background-image: url('./image/Wall\ 1440px.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .start-img::before {
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;   
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 1440px.png');
+  }
+
+  p { font-size: 26px; }
+  i { font-size: 30px; }
+  .icon-Logo { font-size: 51px !important; }
+
+  .Trash-sea {
+    margin-top: 98px;
+    margin-left: 80px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 36px; }
+  .main-Trash-sea { font-size: 42px; }
+  .Trash-sea-title { font-size: 26px; }
+
+  .Big-Three {
+    margin-top: 125px;
+    margin-right: -36px;
+    max-width: 75%;
+  }  
+
+  .Main-Big-Three { font-size: 36px; }
+  .icon-S {
+    top: 11px;        
+    left: 192px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 26px; 
+  }
+
+  .The-Ripple {
+    margin-top: -85px;
+    margin-left: 60px;
+    max-width: 80%;
+  }
+
+  .Main-The-Ripple {
+    position: relative;
+    font-size: 36px;
+  }
+
+  .Find-Your {
+    margin-top: 20px;
+    margin-left: 40px;
+  }
+
+  .main-Find-Avatar { font-size: 42px; }
+  .button { font-size: 28px; }
+  .Avatar-3 { font-size: 24px; }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 85vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+  }
+
+  .logo-Q {
+    font-size: 100px;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .Show { font-size: 26px; }
+  .Roles-main { font-size: 36px; }
+  .Avata-H { font-size: 30px; }
+  .Avata-P { font-size: 24px; }
+
+  .start-img-about {
+    background-image: url('./image/Wall\ 1440px.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 1440px.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+  .footer-space-title { max-width: 35%; }
+}
+
+
+/* =================📑 ฝั่งแท็บเล็ต (8 ขนาด) ================= */
+@media (max-width: 1024px) {
+
+.start-img {
+    background-image: url('./image/Wall\ 992px.png');
+    background-size: cover !important;
+  }
+  .start-img::before {
+    background-size: cover !important;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 992px.png');
+  }
+
+  .hero-section {
+    max-width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "first second "
+      "third third ";
+    row-gap: 16px;
+    column-gap: 16px;
+  }
+
+  .area-first  { grid-area: first; }
+  .area-second { grid-area: third; }
+  .area-third  { grid-area: second; }
+  .area-fourth { display: none; }
+
+  .T {
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu-V, .Find-Your { display: none; }
+  .nav-item { font-size: 24px; }
+  .icon-Logo { font-size: 44px !important; }
+  
+  p { font-size: 42px; }
+  i { font-size: 36px; }
+
+  .Trash-sea {
+    margin-top: 115px;
+    margin-left: 80px;
+    max-width: 100%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 44px; }
+  .main-Trash-sea { font-size: 48px; }
+  .Trash-sea-title { font-size: 42px; }
+
+  .Big-Three {
+    margin-top: 50px;
+    margin-left: -260px;
+    max-width: 55%;
+  }  
+
+  .Main-Big-Three { font-size: 44px; }
+  .icon-S {
+    top: 11px;        
+    left: 220px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 38px; 
+  }
+
+  .The-Ripple {
+    max-width: 100%;
+    margin-top: 128px;
+    margin-left: 60px;
+    padding: 20px 30px; 
+  }
+
+  .Main-The-Ripple { font-size: 35px; }
+  .The-Ripple-title-one,
+  .The-Ripple-title-two { 
+    font-size: 32px; 
+  }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 90vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+    color: white;  
+    max-width: 70%;
+  }
+
+  br { display: none; }
+
+  .logo-Q {
+    font-size: 100px;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    max-width: 100%;
+    width: 800px;
+    margin: auto;
+  }
+
+  .Show {
+    font-size: 48px;
+    margin-top: 24px;  
+  }
+
+  .Roles-main { font-size: 64px; }
+
+  .Avata-space {
+    display: flex;
+    justify-content: space-between; 
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Photo-Avata {
+    margin: auto;
+    object-fit: cover;
+    max-width: 80%;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .Avata-H {
+    font-size: 48px; 
+    margin-top: 16px;
+  }
+
+  .Avata-P {
+    font-size: 36px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+  }
+
+  .start-img-about {
+    background-image: url('./image/Wall\ 992px.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 992px.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+
+  .footer-space-title { max-width: 32%; }  
+  .main-footer { font-size: 40px; }
+  .footer-P { font-size: 28px; }
+  
+  }
+
+@media (max-width: 992px) {
+  .hero-section {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "first second "
+      "third third ";
+  }
+
+  .menu-V, .Find-Your { display: none; }
+  .nav-item { font-size: 24px; }
+  .icon-Logo { font-size: 44px !important; }
+  
+  p { font-size: 36px; }
+  i { font-size: 36px; }
+
+  .Trash-sea {
+    margin-top: 115px;
+    margin-left: 80px;
+    max-width: 100%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 40px; }
+  .main-Trash-sea { font-size: 46px; }
+  .Trash-sea-title { font-size: 36px; }
+
+  .Big-Three {
+    margin-top: 50px;
+    margin-left: -260px;
+    max-width: 55%;
+  }  
+
+  .Main-Big-Three { font-size: 40px; }
+  .icon-S {
+    top: 11px;        
+    left: 200px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 36px; 
+  }
+
+  .The-Ripple {
+    max-width: 100%;
+    margin-top: 128px;
+    margin-left: 20px;
+    padding: 20px 30px; 
+  }
+
+  .Main-The-Ripple { font-size: 38px; }
+  .The-Ripple-title-one,
+  .The-Ripple-title-two { 
+    font-size: 34px; 
+  }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 90vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+    color: white;  
+    max-width: 70%;
+  }
+
+  br { display: none; }
+
+  .logo-Q {
+    font-size: 100px;
+    color: #40e384;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    max-width: 100%;
+    width: 800px;
+    margin: auto;
+  }
+
+  .Show {
+    font-size: 48px;
+    margin-top: 24px;  
+  }
+
+  .Roles-main { font-size: 64px; }
+
+  .Avata-space {
+    display: flex;
+    justify-content: space-between; 
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Photo-Avata {
+    margin: auto;
+    object-fit: cover;
+    max-width: 60%;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .Avata-H {
+    font-size: 48px; 
+    margin-top: 16px;
+  }
+
+  .Avata-P {
+    font-size: 36px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+  }
+
+  .start-img-about {
+    background-image: url('./image/Wall\ 992px.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 992px.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+
+  .footer-space-title { max-width: 32%; }  
+  .main-footer { font-size: 40px; }
+  .footer-P { font-size: 28px; } 
+
+}
+
+@media (max-width: 834px) {
+  .hero-section {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "first second "
+      "third third ";
+  }
+
+  .nav-item { font-size: 24px; }
+  .icon-Logo { font-size: 44px !important; }
+  
+  p { font-size: 32px; }
+  i { font-size: 36px; }
+
+  .Trash-sea {
+    margin-top: 115px;
+    margin-left: 80px;
+    max-width: 100%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 40px; }
+  .main-Trash-sea { font-size: 46px; }
+  .Trash-sea-title { font-size: 36px; }
+
+  .Big-Three {
+    margin-top: 50px;
+    margin-left: -260px;
+    max-width: 55%;
+  }  
+
+  .Main-Big-Three { font-size: 40px; }
+  .icon-S {
+    top: 11px;        
+    left: 175px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 32px; 
+  }
+
+  .The-Ripple {
+    max-width: 100%;
+    margin-top: 128px;
+    margin-left: 0px;
+    padding: 20px 30px; 
+  }
+
+  .Main-The-Ripple { font-size: 30px; }
+  .The-Ripple-title-one,
+  .The-Ripple-title-two { 
+    font-size: 26px; 
+  }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 90vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+    color: white;  
+    max-width: 70%;
+  }
+
+  br { display: none; }
+
+  .logo-Q {
+    font-size: 100px;
+    color: #40e384;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    max-width: 100%;
+    width: 700px;
+    margin: auto;
+  }
+
+  .Show {
+    font-size: 48px;
+    margin-top: 24px;  
+  }
+
+  .Roles-main { font-size: 64px; }
+
+  .Avata-space {
+    display: flex;
+    justify-content: space-between; 
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Photo-Avata {
+    margin: auto;
+    object-fit: cover;
+    max-width: 60%;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .Avata-H {
+    font-size: 48px; 
+    margin-top: 16px;
+  }
+
+  .Avata-P {
+    font-size: 36px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+  }
+
+  .start-img-about {
+    background-image: url('./image/Wall\ 992px.png');
+    position: relative;       
+    overflow: hidden;      
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    animation: zoomAndFade 0.7s ease-out forwards;
+    z-index: 1;
+  }
+
+  .start-img-about:before {
+    content: "";       
+    position: absolute;
+    top: 0;            
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 992px.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation: overlayFadeIn 0.9s ease-in-out forwards;
+  }
+
+  .footer-space-title { max-width: 32%; }  
+  .main-footer { font-size: 40px; }
+  .footer-P { font-size: 28px; } 
+
+}
+
+@media (max-width: 820px) {}
+@media (max-width: 810px) {}
+@media (max-width: 800px) {}
+
+@media (max-width: 768px) {
+  .start-img {
+    background-image: url('./image/Wall\ 768px.png');
+  }
+  .start-img::before { 
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 768px.png');
+  }
+
+  .nav-item { font-size: 19px; }
+  p { font-size: 32px; }
+  i { font-size: 28px; }
+
+  .Trash-sea {
+    margin-top: 100px;
+    margin-left: 80px;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 36px; }
+  .main-Trash-sea { font-size: 40px; }
+  .Trash-sea-title { font-size: 32px; }
+
+  .Big-Three {
+    margin-top: 40px;
+    margin-left: -120px;
+    max-width: 60%;
+  }  
+
+  .Main-Big-Three { font-size: 36px; }
+  .icon-S {
+    left: 165px;     
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 30px; 
+  }
+
+  .The-Ripple {
+    margin-top: 110px;
+    margin-left: 15px;
+  }
+
+  .Main-The-Ripple { font-size: 26px; }
+  .The-Ripple-title-one,
+  .The-Ripple-title-two { 
+    font-size: 24px; 
+  }
+
+  .container {
+    width: 625px;
+  }
+
+  .Show { font-size: 36px; }
+  .Roles-main { font-size: 48px; }
+
+  .start-img-about {
+    background-image: url('./image/Wall\ 768px.png');
+  }
+
+  .start-img-about:before {
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.7) 0%,       
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 768px.png');
+  }
+
+  .footer-space-title { max-width: 31%; }  
+  .main-footer { font-size: 36px; }
+  .footer-P { font-size: 26px; } 
+}
+
+@media (max-width: 744px) {
+  .hero-section {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "first second "
+      "third third ";
+  }
+
+  .nav-item { font-size: 19px; }
+  .icon-Logo { font-size: 42px !important; }
+  
+  p { font-size: 28px; }
+  i { font-size: 30px; }
+
+  .Trash-sea {
+    margin-top: 115px;
+    margin-left: 80px;
+    max-width: 100%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 32px; }
+  .main-Trash-sea { font-size: 36px; }
+  .Trash-sea-title { font-size: 36px; }
+
+  .Big-Three {
+    margin-top: 50px;
+    margin-left: -260px;
+    max-width: 55%;
+  }  
+
+  .Main-Big-Three { font-size: 32px; }
+  .icon-S {
+    top: 11px;        
+    left: 160px;     
+    font-size: 26px;  
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 28px; 
+  }
+
+  .The-Ripple {
+    max-width: 100%;
+    margin-top: 125px;
+    margin-left: 0px;
+    padding: 20px 30px; 
+  }
+
+  .Main-The-Ripple { font-size: 28px; }
+  .The-Ripple-title-one,
+  .The-Ripple-title-two { 
+    font-size: 28px; 
+  }
+
+  .container-About {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 90vh;                    
+    width: 100%;
+    text-align: left;
+    margin-top: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .About-title {
+    margin-top: -20px;
+    margin-left: 100px;
+    color: white;  
+    max-width: 70%;
+  }
+
+  br { display: none; }
+
+  .logo-Q {
+    font-size: 100px;
+    color: #40e384;
+    margin-top: 24px;
+    margin-bottom: 20px;  
+  }
+
+  .container {
+    max-width: 100%;
+    width: 475px;
+    margin: auto;
+  }
+
+  .Show {
+    font-size: 42px;
+    margin-top: 24px;  
+  }
+
+  .Roles-main { font-size: 56px; }
+
+  .Avata-space {
+    display: flex;
+    justify-content: space-between; 
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Photo-Avata {
+    margin: auto;
+    object-fit: cover;
+    max-width: 60%;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .Avata-H {
+    font-size: 40px; 
+    margin-top: 16px;
+  }
+
+  .Avata-P {
+    font-size: 30px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+  }
+
+  .footer-space-title { max-width: 32%; }  
+  .main-footer { font-size: 36px; }
+  .footer-P { font-size: 22px; } 
+
+}
+@media (max-width: 600px) {
+
+.nav-item:nth-child(2),
+  .nav-item:nth-child(3) {
+    display: none;
+  } 
+
+  .hero-section {
+    grid-template-areas:
+      "first first "
+      "second second ";
+  }
+
+  .area-second { grid-area: second; }
+  .area-third { display: none; }
+
+  .start-img {
+    background-image: url('./image/Wall\ 576\ T2.png');
+  }
+  .start-img::before { 
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 576\ T2.png');
+  }
+
+  .nav-item { font-size: 21px; }
+  p { font-size: 32px; }
+  i { font-size: 32px; }
+
+  .Trash-sea {
+    margin-top: 100px;
+    margin-left: 40px;
+    max-width: 55%;
+  }
+
+  .Main-PLASTIC-TIDE{ 
+    font-size: 36px; 
+  }
+
+  .main-Trash-sea{ 
+    font-size: 40px; 
+  }
+
+  .Main-Big-Three { 
+    font-size: 36px; 
+  }
+
+  .Big-Three {
+    margin-top: 25px;
+    margin-left: -50px;
+    max-width: 75%;
+  }  
+
+  .icon-S {
+    left: 175px;     
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 32px; 
+  }
+
+  .container {
+    width: 475px;
+  }
+
+  .Avata-H { font-size: 36px; }
+  .Avata-P { font-size: 28px; }
+
+  .footer-space-title { max-width: 100%; }  
+  .main-footer {
+    font-size: 36px;  
+    margin-top: 12px;
+  }
+  .footer-P { font-size: 26px; } 
+
+  .footer-space {
+    display: flex;
+    justify-content: space-between; 
+    flex-direction: column;         
+    width: 100%;  
+  }
+  
+}
+
+/* =================📱 ฝั่งมือถือ (6 ขนาด) ================= */
+@media (max-width: 576px) {
+  .About-title {margin-left: 50px;}
+  .nav-item:nth-child(2),
+  .nav-item:nth-child(3) {
+    display: none;
+  } 
+
+  .hero-section {
+    grid-template-areas:
+      "first first "
+      "second second ";
+  }
+
+  .area-second { grid-area: second; }
+  .area-third { display: none; }
+
+  .start-img {
+    background-image: url('./image/Wall\ 576\ T2.png');
+  }
+  .start-img::before { 
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 576\ T2.png');
+  }
+
+  .nav-item { font-size: 20px; }
+  p { font-size: 26px; }
+  i { font-size: 32px; }
+
+  .Trash-sea {
+    margin-top: 100px;
+    margin-left: 40px;
+    max-width: 55%;
+  }
+
+  .Main-PLASTIC-TIDE,
+  .main-Trash-sea,
+  .Main-Big-Three { 
+    font-size: 34px; 
+  }
+
+  .Trash-sea-title { font-size: 28px; }
+
+  .Big-Three {
+    margin-top: 25px;
+    margin-left: -50px;
+    max-width: 75%;
+  }  
+
+  .icon-S {
+    left: 175px;     
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 26px; 
+  }
+
+  .container {
+    width: 475px;
+  }
+
+  .Avata-H { font-size: 36px; }
+  .Avata-P { font-size: 28px; }
+
+  .footer-space-title { max-width: 100%; }  
+  .main-footer {
+    font-size: 36px;  
+    margin-top: 12px;
+  }
+  .footer-P { font-size: 26px; } 
+
+  .footer-space {
+    display: flex;
+    justify-content: space-between; 
+    flex-direction: column;         
+    width: 100%;  
+  }
+}
+
+@media (max-width: 430px) {
+  .Big-Three-title-three {display: none;}
+  .nav-item:first-child{display: none;}
+
+  .start-img {
+    background-image: url('./image/Wall\ 430px.png');
+  }
+  .start-img::before { 
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 430px.png');
+  }
+
+  .logo-H {
+    margin-left: 24px;
+    font-size: 45px;
+  }
+
+  .nav-item { font-size: 18px; margin-right: 6px;}
+  .icon-Logo { font-size: 38px !important; margin-left: 1px;}
+  p { font-size: 24px; }
+  i { font-size: 24px; }
+
+  .Trash-sea {
+    margin-top: 100px;
+    margin-left: 40px;
+    max-width: 60%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 30px; }
+  .main-Trash-sea { font-size: 34px; }
+  .Trash-sea-title { font-size: 24px; }
+
+  .Big-Three {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+  }  
+
+  .Main-Big-Three { font-size: 30px; }
+  .icon-S {
+    left: 141px;     
+  }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 24px; 
+  }
+
+  .container {
+    width: 350px;
+  }
+
+  .main-footer { font-size: 30px; }
+  .footer-P { font-size: 22px; } 
+
+}
+
+@media (max-width: 393px) { 
+ 
+ .nav-item:first-child{display: none;}
+
+  .start-img {
+    background-image: url('./image/Wall\ 430px.png');
+  }
+  .start-img::before { 
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 430px.png');
+  }
+
+  .logo-H {
+    margin-left: 24px;
+    font-size: 45px;
+  }
+
+  .nav-item { font-size: 18px; margin-right: 6px;}
+  .icon-Logo { font-size: 38px !important; margin-left: 1px;}
+  p { font-size: 22px; }
+  i { font-size: 24px; }
+
+  .Trash-sea {
+    margin-top: 100px;
+    margin-left: 40px;
+    max-width: 60%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 28px; }
+  .main-Trash-sea { font-size: 32px; }
+  .Trash-sea-title { font-size: 22px; }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 22px; 
+  }
+
+  .Main-Big-Three { font-size: 28px; }
+  .icon-S {
+    left: 125px;     
+  }
+
+  .container {
+    width: 320px;
+  }
+
+  .main-footer { font-size: 30px; }
+  .footer-P { font-size: 22px; } 
+
+}
+
+@media (max-width: 375px) {
+
+.nav-item:first-child{display: none;}
+
+  .start-img {
+    background-image: url('./image/Wall\ 430px.png');
+  }
+  .start-img::before { 
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 430px.png');
+  }
+
+  .logo-H {
+    margin-left: 24px;
+    font-size: 45px;
+  }
+
+  .nav-item { font-size: 18px; margin-right: 6px;}
+  .icon-Logo { font-size: 38px !important; margin-left: 1px;}
+  p { font-size: 22px; }
+  i { font-size: 24px; }
+
+  .Trash-sea {
+    margin-top: 80px;
+    margin-left: 40px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 28px; }
+  .main-Trash-sea { font-size: 32px; }
+  .Trash-sea-title { font-size: 22px; }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 22px; 
+  }
+
+  .Big-Three-title-three {display: none;}
+
+  .Main-Big-Three { font-size: 28px; }
+  .icon-S {
+    left: 120px;     
+  }
+
+  .container {
+    width: 300px;
+  }  
+
+  .Show { font-size: 30px; }
+  .Roles-main { font-size: 40px; }
+  .Avata-H { font-size: 30px; }
+  .Avata-P { font-size: 22px; }
+ 
+  .main-footer { font-size: 30px; }
+  .footer-P { font-size: 22px; } 
+
+}
+
+@media (max-width: 360px) {
+  
+ .nav-item:first-child{display: none;}
+
+  .start-img {
+    background-image: url('./image/Wall\ 430px.png');
+  }
+  .start-img::before { 
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 430px.png');
+  }
+
+  .logo-H {
+    margin-left: 24px;
+    font-size: 36px;
+  }
+
+  .nav-item { font-size: 18px; margin-right: 6px;}
+  .icon-Logo { font-size: 38px !important; margin-left: 1px;}
+  p { font-size: 20px; }
+  i { font-size: 24px; }
+
+  .Trash-sea {
+    margin-top: 100px;
+    margin-left: 40px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 28px; }
+  .main-Trash-sea { font-size: 32px; }
+  .Trash-sea-title { font-size: 20px; }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 20px; 
+  }
+
+  .Main-Big-Three { font-size: 28px; }
+  .icon-S {
+    left: 115px;     
+  }
+
+  .container {
+    width: 300px;
+  }
+
+  .main-footer { font-size: 30px; }
+  .footer-P { font-size: 22px; } 
+   
+}
+
+@media (max-width: 320px) {
+
+
+  .nav-item:first-child{display: none;}
+
+  .start-img {
+    background-image: url('./image/Wall\ 430px.png');
+  }
+  .start-img::before { 
+    background-image: linear-gradient(to right, 
+      rgba(0, 0, 0, 0.5) 0%,       
+      rgba(255, 255, 255, 0.035) 50%,
+      rgba(255, 255, 255, 0.35) 100% 
+    ), url('./image/Wall\ 430px.png');
+  }
+
+  .logo-H {
+    margin-left: 24px;
+    font-size: 36px;
+  }
+
+  .nav-item { font-size: 16px; margin-right: 6px;}
+  .icon-Logo { font-size: 36px !important; margin-left: 1px;}
+  p { font-size: 16px; }
+  i { font-size: 24px; }
+
+  .Trash-sea {
+    margin-top: 80px;
+    margin-left: 40px;
+    max-width: 65%;
+  }
+
+  .Main-PLASTIC-TIDE { font-size: 22px; }
+  .main-Trash-sea { font-size: 28px; }
+  .Trash-sea-title { font-size: 16px; }
+
+  .Big-Three-title-one,
+  .Big-Three-title-two,
+  .Big-Three-title-three { 
+    font-size: 16px; 
+  }
+
+  .Big-Three-title-three {display: none;}
+
+  .Main-Big-Three { font-size: 28px; }
+  .icon-S {
+    left: 110px;     
+  }
+  
+  .container {
+    width: 250px;
+  }  
+
+  .Show { font-size: 26px; }
+  .Roles-main { font-size: 36px; }
+  .Avata-H { font-size: 26px; }
+  .Avata-P { font-size: 18px; }
+  .main-footer { font-size: 26px; }
+  .footer-P { font-size: 16px; }   
+
+}
+
